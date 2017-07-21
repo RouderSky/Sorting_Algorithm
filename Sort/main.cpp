@@ -1,5 +1,3 @@
-//这里所有的函数都用来对char数组进行从小到大的排序
-
 #include <iostream>		/* cout */
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
