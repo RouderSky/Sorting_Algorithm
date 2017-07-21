@@ -32,14 +32,15 @@ public:
 		//分割标准，取了首元素来当标准
 		char standard = a[left];
 
-		int i = left + 1;
-		int j = right;
+		/*这段代码非常脆弱，所有的大于小于号都要非常准确，改写失败，可以当作模板记下来*/
+		int i = left;
+		int j = right+1;
 		while (i < j)
 		{
 			//注意a[i] <= standard和standard <= a[j]的等于号
-			//注意i、j的边界别走多了，或者走少了
-			while (a[i] <= standard && i < right){ ++i; }
-			while (standard <= a[j] && j > left){ --j; }
+			//特别注意 ++i 和 --j 的位置
+			while (a[++i] <= standard && i <= right){  }
+			while (standard <= a[--j] && j >= left+1){  }
 
 			if (i < j)
 			{
@@ -48,7 +49,7 @@ public:
 				a[j] = temp;
 			}
 		}
-
+		/*-------------------------------------------------------*/
 		a[left] = a[j];
 		a[j] = standard;
 
@@ -56,6 +57,7 @@ public:
 	}
 };
 
+//三向切分的快速排序
 class Quick3way
 {
 public:
@@ -75,12 +77,13 @@ public:
 		{
 			char standard = a[left];
 
-			int i = left + 1;
-			int j = right;
+			//第一次切分
+			int i = left;
+			int j = right+1;
 			while (i < j)
 			{
-				while (a[i] < standard && i <= right){ ++i; }
-				while (standard <= a[j] && j >= left + 1){ --j; }
+				while (a[++i] < standard && i <= right){ }
+				while (standard <= a[--j] && j >= left+1){ }
 
 				if (i < j)
 				{
@@ -94,6 +97,7 @@ public:
 
 			int lessRight = j - 1;
 
+			//第二次切分
 			j = right;
 			while (i < j)
 			{
