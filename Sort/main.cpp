@@ -33,18 +33,25 @@ int main()
 {
 #if 1
 	srand(time(NULL));
-	char a[10];
+	char a[5] = {'j','i','h','o','p'};
 
-	for (int i = 0; i < 10; ++i)
-		a[i] = 'A' + rand() % 26;
+//	for (int i = 0; i < 5; ++i)
+//		a[i] = 'A' + rand() % 26;
 
-	//SelectionSort(a, 10);
-	//InsertionSort2_0(a, 10);
-	//ShellSort2_0(a, 10);
-	Quick test;
-	test.Sort(a, 10);
+//	Selection selection;
+//	selection.Sort(a, 5);
+//	Insertion insertion;
+//	insertion.Sort2_0(a, 5);
+//	Shell shell;
+//	shell.Sort2_0(a, 5);
+//	Merge merge;
+//	merge.Sort(a, 5);
+	Quick quick;
+	quick.Sort(a, 5);
+//	Quick3way quick3way;
+//	quick3way.Sort1_0(a, 5);
 
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < 5; ++i)
 		cout << a[i] << " ";
 	cout << endl;
 #endif
