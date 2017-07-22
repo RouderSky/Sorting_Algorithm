@@ -49,7 +49,7 @@ int main()
 	Quick quick;
 	quick.Sort(a, 10);
 //	Quick3way quick3way;
-//	quick3way.Sort1_0(a, 10);
+//	quick3way.Sort2_0(a, 10);
 
 	for (int i = 0; i < 10; ++i)
 		cout << a[i] << " ";

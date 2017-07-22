@@ -31,16 +31,14 @@ public:
 	{
 		//分割标准，取了首元素来当标准
 		char standard = a[left];
-
-		/*这段代码非常脆弱，所有的大于小于号都要非常准确，改写失败，可以当作模板记下来*/
+#if 0
+		//自己写的第一个版本
 		int i = left;
 		int j = right+1;
 		while (i < j)
 		{
-			//注意a[i] <= standard和standard <= a[j]的等于号
-			//特别注意 ++i 和 --j 的位置
-			while (a[++i] <= standard && i <= right){  }
-			while (standard <= a[--j] && j >= left+1){  }
+			while (a[++i] <= standard && i <= right){  }			//i <= right可以改成i < right
+			while (standard <= a[--j] && j >= left+1){  }			//j >= left+1不可以更改j > left+1
 
 			if (i < j)
 			{
@@ -49,7 +47,48 @@ public:
 				a[j] = temp;
 			}
 		}
-		/*-------------------------------------------------------*/
+#endif
+#if 0
+		/*这段代码非常脆弱，所有的大于小于号都要非常准确，改写失败，可以当作模板记下来*/
+		//自己写的第二个版本
+		int i = left + 1;
+		int j = right;
+		while (true)
+		{
+			while (a[i] <= standard && i <= right) { ++i; }			//i <= right可以改成i < right
+			while (standard <= a[j] && j >= left+1) { --j; }		//j >= left+1不可以更改j > left+1
+
+			if (i < j)
+			{
+				char temp = a[i];
+				a[i] = a[j];
+				a[j] = temp;
+			}
+			else
+				break;
+		}
+#endif
+#if 1
+		//书本的版本
+		int i = left;
+		int j = right + 1;
+		while (true)
+		{
+			//特别注意 ++i 和 --j 的位置
+			//注意a[i] <= standard和standard <= a[j]的等于号
+			while (a[++i] <= standard && i <= right){}				//i <= right可以改成i < right
+			while (standard <= a[--j] && j >= left + 1){}			//j >= left+1不可以更改j > left+1
+
+			if (i < j)
+			{
+				char temp = a[i];
+				a[i] = a[j];
+				a[j] = temp;
+			}
+			else
+				break;
+		}
+#endif
 		a[left] = a[j];
 		a[j] = standard;
 
@@ -134,7 +173,38 @@ public:
 		}
 		else
 		{
+			//三向切分
+			char standard = a[left];
+			int lt = left;				//lt其实永远都指向最左端的基准值
+			int i = left + 1;
+			int gt = right;
+			while (i <= gt)
+			{
+				if (a[i] < standard)
+				{
+					char temp = a[i];
+					a[i] = a[lt];
+					a[lt] = temp;
 
+					++i;
+					++lt;
+				}
+				else if (a[i] == standard)
+				{
+					++i;
+				}
+				else if (a[i] > standard)
+				{
+					char temp = a[i];
+					a[i] = a[gt];
+					a[gt] = temp;
+
+					--gt;
+				}
+			}
+
+			SortCore2_0(a, left, lt - 1);
+			SortCore2_0(a, gt + 1, right);
 		}
 	}
 };
