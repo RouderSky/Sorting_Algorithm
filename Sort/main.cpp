@@ -6,6 +6,7 @@
 #include "ShellSort.h"
 #include "MergeSort.h"
 #include "QuickSort.h"
+#include "HeapSort.h"
 
 using namespace std;
 
@@ -48,8 +49,10 @@ int main()
 //	merge.Sort(a, 5);
 //	Quick quick;
 //	quick.Sort(a, 10);
-	Quick3way quick3way;
-	quick3way.Sort(a, 10);
+//	Quick3way quick3way;
+//	quick3way.Sort(a, 10);
+	Heap heap;
+	heap.sort(a, 10);
 
 	for (int i = 0; i < 10; ++i)
 		cout << a[i] << " ";
