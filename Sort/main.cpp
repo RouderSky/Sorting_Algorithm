@@ -46,10 +46,10 @@ int main()
 //	shell.Sort2_0(a, 5);
 //	Merge merge;
 //	merge.Sort(a, 5);
-	Quick quick;
-	quick.Sort(a, 10);
-//	Quick3way quick3way;
-//	quick3way.Sort2_0(a, 10);
+//	Quick quick;
+//	quick.Sort(a, 10);
+	Quick3way quick3way;
+	quick3way.Sort(a, 10);
 
 	for (int i = 0; i < 10; ++i)
 		cout << a[i] << " ";

@@ -100,13 +100,13 @@ public:
 class Quick3way
 {
 public:
-	void Sort1_0(char *a, int length)
+	void Sort(char *a, int length)
 	{
 		//在开始递归排序前最好先打乱一下数组，防止不合理的切分；这样就不容易出现O(N^2)这种情况
-		SortCore1_0(a, 0, length - 1);
+		SortCore(a, 0, length - 1);
 	}
 
-	void SortCore1_0(char *a, int left, int right)
+	void SortCore(char *a, int left, int right)
 	{
 		if (left >= right)
 		{
@@ -114,9 +114,11 @@ public:
 		}
 		else
 		{
-			char standard = a[left];
-
+			//三向切分
+#if 0
+			//自己的实现
 			//第一次切分
+			char standard = a[left];
 			int i = left;
 			int j = right+1;
 			while (i < j)
@@ -153,27 +155,12 @@ public:
 
 			int equelRight = j;
 
-			SortCore1_0(a, left, lessRight);
-			SortCore1_0(a, equelRight + 1, right);
-		}
-	}
-
-	//如果无法理解这段代码，请使用样例：6、2、3、7、6、6、9、1，来模拟一下
-	void Sort2_0(char *a, int length)
-	{
-		//在开始递归排序前最好先打乱一下数组，防止不合理的切分；这样就不容易出现O(N^2)这种情况
-		SortCore2_0(a, 0, length - 1);
-	}
-
-	void SortCore2_0(char *a, int left, int right)
-	{
-		if (left >= right)
-		{
-			return;
-		}
-		else
-		{
-			//三向切分
+			SortCore(a, left, lessRight);
+			SortCore(a, equelRight + 1, right);
+#endif
+#if 1		
+			//书本的实现
+			//如果无法理解这段代码，请使用样例：6、2、3、7、6、6、9、1，来模拟一下
 			char standard = a[left];
 			int lt = left;				//lt其实永远都指向最左端的基准值
 			int i = left + 1;
@@ -203,8 +190,9 @@ public:
 				}
 			}
 
-			SortCore2_0(a, left, lt - 1);
-			SortCore2_0(a, gt + 1, right);
+			SortCore(a, left, lt - 1);
+			SortCore(a, gt + 1, right); 
+#endif
 		}
 	}
 };
