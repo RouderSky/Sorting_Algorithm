@@ -62,7 +62,6 @@ public:
 	//核心
 	void sink(int k)
 	{
-		//这个写法一定是经过了迭代才会这么精简
 		while (2 * k + 1 < N)
 		{
 			int maxChild = 2 * k + 1;
