@@ -49,7 +49,7 @@ public:
 		}
 #endif
 #if 0
-		/*这段代码非常脆弱，所有的大于小于号都要非常准确，改写失败，可以当作模板记下来*/
+		/*这段代码非常脆弱，所有的大于小于号都要非常准确，可以当作模板记下来*/
 		//自己写的第二个版本
 		int i = left + 1;
 		int j = right;
@@ -68,7 +68,7 @@ public:
 				break;
 		}
 #endif
-#if 1
+#if 0
 		//书本的版本
 		int i = left;
 		int j = right + 1;
@@ -88,6 +88,26 @@ public:
 			else
 				break;
 		}
+#endif
+#if 1
+		//改：书本的版本
+		int i = left+1;
+		int j = right;
+		do					//使用do...while才是正确的，之前之所以会出错是因为没有意识到i和j的初始位置是需要先用两个while来确定的
+		{
+			//特别注意 ++i 和 --j 的位置
+			//注意a[i] <= standard和standard <= a[j]的等于号
+			while (a[i] <= standard && i <= right){ ++i; }				//i <= right可以改成i < right
+			while (standard <= a[j] && j >= left + 1){ --j; }			//j >= left+1不可以更改j > left+1
+
+			if (i < j)
+			{
+				char temp = a[i];
+				a[i] = a[j];
+				a[j] = temp;
+			}
+
+		} while (i < j);
 #endif
 		a[left] = a[j];
 		a[j] = standard;
@@ -115,16 +135,16 @@ public:
 		else
 		{
 			//三向切分
-#if 0
+#if 1
 			//自己的实现
 			//第一次切分
 			char standard = a[left];
-			int i = left;
-			int j = right+1;
-			while (i < j)
+			int i = left+1;
+			int j = right;
+			do
 			{
-				while (a[++i] < standard && i <= right){ }
-				while (standard <= a[--j] && j >= left+1){ }
+				while (a[i] < standard && i <= right){ ++i; }
+				while (standard <= a[j] && j >= left+1){ --j; }
 
 				if (i < j)
 				{
@@ -132,7 +152,7 @@ public:
 					a[i] = a[j];
 					a[j] = temp;
 				}
-			}
+			}while(i<j);
 			a[left] = a[j];
 			a[j] = standard;
 
@@ -140,7 +160,7 @@ public:
 
 			//第二次切分
 			j = right;
-			while (i < j)
+			do
 			{
 				while (a[i] == standard && i <= right){ ++i; }
 				while (standard < a[j] && j >= lessRight + 2){ --j; }
@@ -151,14 +171,14 @@ public:
 					a[i] = a[j];
 					a[j] = temp;
 				}
-			}
+			}while(i < j);
 
 			int equelRight = j;
 
 			SortCore(a, left, lessRight);
 			SortCore(a, equelRight + 1, right);
 #endif
-#if 1		
+#if 0		
 			//书本的实现
 			//如果无法理解这段代码，请使用样例：6、2、3、7、6、6、9、1，来模拟一下
 			char standard = a[left];
