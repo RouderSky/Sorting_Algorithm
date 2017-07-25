@@ -1,4 +1,4 @@
-#ifndef __MERGESORT_H__
+ï»¿#ifndef __MERGESORT_H__
 #define __MERGESORT_H__
 
 #include <iostream>		/* NULL */
@@ -9,13 +9,13 @@ using namespace std;
 class Merge
 {
 private:
-	//´´½¨Ò»¸öaÊı×éµÄ¸±±¾,¸¨Öú¿Õ¼ä£»ÆäÊµ¿ÉÒÔ²»ÓÃµÄ£¬ÓÃÊ±¼äÀ´»»¿Õ¼ä
+	//åˆ›å»ºä¸€ä¸ªaæ•°ç»„çš„å‰¯æœ¬,è¾…åŠ©ç©ºé—´ï¼›å…¶å®å¯ä»¥ä¸ç”¨çš„ï¼Œç”¨æ—¶é—´æ¥æ¢ç©ºé—´
 	char *aux;
 public:
 	Merge(){ aux = NULL; }
 
-	//µ¥´Î¹é²¢£¬½«aÊı×éµÄÁ½²¿·ÖÒÑÅÅºÃµÄ×ÓÊı×éºÏ²¢ÆğÀ´
-	//mid´ú±í×ó±ß×ÓÊı×éµÄ×îºóÒ»¸öÔªËØÏÂ±ê
+	//å•æ¬¡å½’å¹¶ï¼Œå°†aæ•°ç»„çš„ä¸¤éƒ¨åˆ†å·²æ’å¥½çš„å­æ•°ç»„åˆå¹¶èµ·æ¥
+	//midä»£è¡¨å·¦è¾¹å­æ•°ç»„çš„æœ€åä¸€ä¸ªå…ƒç´ ä¸‹æ ‡
 	void merge(char *a, int left, int mid, int right)
 	{
 		for (int i = left; i <= right; ++i)
@@ -23,7 +23,7 @@ public:
 
 		int idxOfLeft = left;
 		int idxOfRight = mid + 1;
-		//¿ªÊ¼¹é²¢
+		//å¼€å§‹å½’å¹¶
 		for (int i = left; i <= right; ++i)
 		{
 			if (idxOfLeft > mid&&idxOfRight <= right)
@@ -37,8 +37,8 @@ public:
 		}
 	}
 
-	//×Ô¶¥ÏòÏÂµÄµİ¹é¹é²¢ÅÅĞò
-	//Õâ¸öº¯Êı»¹¿ÉÒÔÓÅ»¯£¬Èç¹ûleftºÍrightÖ®¼äµÄ²åÖµĞ¡µ½Ò»¶¨µÄ³Ì¶È£¬¾Í²»ÓÃÔÙµİ¹éÁË£»Ö±½ÓÓÃ²åÈëÅÅĞò¡¢Ï£¶ûÅÅĞò»òÕßÑ¡ÔñÅÅĞò£¬ËÙ¶È¿ÉÒÔÌáÉı£»ÆäÖĞ²åÈëÅÅĞò¿ÉÒÔËõ¶Ì10%~15%
+	//è‡ªé¡¶å‘ä¸‹çš„é€’å½’å½’å¹¶æ’åº
+	//è¿™ä¸ªå‡½æ•°è¿˜å¯ä»¥ä¼˜åŒ–ï¼Œå¦‚æœleftå’Œrightä¹‹é—´çš„æ’å€¼å°åˆ°ä¸€å®šçš„ç¨‹åº¦ï¼Œå°±ä¸ç”¨å†é€’å½’äº†ï¼›ç›´æ¥ç”¨æ’å…¥æ’åºã€å¸Œå°”æ’åºæˆ–è€…é€‰æ‹©æ’åºï¼Œé€Ÿåº¦å¯ä»¥æå‡ï¼›å…¶ä¸­æ’å…¥æ’åºå¯ä»¥ç¼©çŸ­10%~15%
 	void SortCore(char *a, int left, int right)
 	{
 		if (left >= right)
@@ -48,14 +48,14 @@ public:
 			int mid = (left + right) / 2;
 			SortCore(a, left, mid);
 			SortCore(a, mid + 1, right);
-			merge(a, left, mid, right);		//ÕâÌõÓï¾äÔÚÖ´ĞĞÇ°»¹¿ÉÒÔ×öÒ»¸öÅĞ¶Ï£ºÈç¹ûa[mid]<=a[mid+1]£¬ÕâÌõÓï¾ä¿ÉÒÔ²»Ö´ĞĞ£»
+			merge(a, left, mid, right);		//è¿™æ¡è¯­å¥åœ¨æ‰§è¡Œå‰è¿˜å¯ä»¥åšä¸€ä¸ªåˆ¤æ–­ï¼šå¦‚æœa[mid]<=a[mid+1]ï¼Œè¿™æ¡è¯­å¥å¯ä»¥ä¸æ‰§è¡Œï¼›
 		}
 	}
 
-	//Æô¶¯º¯Êı
+	//å¯åŠ¨å‡½æ•°
 	void Sort(char *a, int length)
 	{
-		//±£ÏÕ
+		//ä¿é™©
 		if (aux != NULL)
 		{
 			delete[] aux;
@@ -71,14 +71,14 @@ public:
 class MergeBu
 {
 private:
-	//´´½¨Ò»¸öaÊı×éµÄ¸±±¾,¸¨Öú¿Õ¼ä£»ÆäÊµ¿ÉÒÔ²»ÓÃµÄ£¬ÓÃÊ±¼äÀ´»»¿Õ¼ä
+	//åˆ›å»ºä¸€ä¸ªaæ•°ç»„çš„å‰¯æœ¬,è¾…åŠ©ç©ºé—´ï¼›å…¶å®å¯ä»¥ä¸ç”¨çš„ï¼Œç”¨æ—¶é—´æ¥æ¢ç©ºé—´
 	char *aux;
 
 public:
 	MergeBu(){ aux = NULL; }
 
-	//µ¥´Î¹é²¢£¬½«aÊı×éµÄÁ½²¿·ÖÒÑÅÅºÃµÄ×ÓÊı×éºÏ²¢ÆğÀ´
-	//mid´ú±í×ó±ß×ÓÊı×éµÄ×îºóÒ»¸öÔªËØÏÂ±ê
+	//å•æ¬¡å½’å¹¶ï¼Œå°†aæ•°ç»„çš„ä¸¤éƒ¨åˆ†å·²æ’å¥½çš„å­æ•°ç»„åˆå¹¶èµ·æ¥
+	//midä»£è¡¨å·¦è¾¹å­æ•°ç»„çš„æœ€åä¸€ä¸ªå…ƒç´ ä¸‹æ ‡
 	void merge(char *a, int left, int mid, int right)
 	{
 		for (int i = left; i <= right; ++i)
@@ -86,7 +86,7 @@ public:
 
 		int idxOfLeft = left;
 		int idxOfRight = mid + 1;
-		//¿ªÊ¼¹é²¢
+		//å¼€å§‹å½’å¹¶
 		for (int i = left; i <= right; ++i)
 		{
 			if (idxOfLeft > mid&&idxOfRight <= right)
@@ -100,11 +100,11 @@ public:
 		}
 	}
 
-	//×Ôµ×ÏòÉÏµÄ¹é²¢ÅÅĞò
-	//¿ÉÒÔ¸øÁ´±í½øĞĞÅÅĞò£¬¶ø²»ÓÃ¸¨ÖúÊı×é
+	//è‡ªåº•å‘ä¸Šçš„å½’å¹¶æ’åº
+	//å¯ä»¥ç»™é“¾è¡¨è¿›è¡Œæ’åºï¼Œè€Œä¸ç”¨è¾…åŠ©æ•°ç»„
 	void Sort(char *a, int length)
 	{
-		//±£ÏÕ
+		//ä¿é™©
 		if (aux)
 		{
 			delete[] aux;
@@ -115,7 +115,7 @@ public:
 
 		for (int subArraySize = 1; subArraySize < length; subArraySize <<= 1)
 		{
-			for (int left = 0; left < length - subArraySize; left += (subArraySize << 1))		//×¢ÒâÕâÀïµÄÖÕÖ¹Ìõ¼ş
+			for (int left = 0; left < length - subArraySize; left += (subArraySize << 1))		//æ³¨æ„è¿™é‡Œçš„ç»ˆæ­¢æ¡ä»¶
 				merge(a, left, left + subArraySize - 1, min(left + (subArraySize << 1) - 1, length - 1));
 		}
 	}

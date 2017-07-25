@@ -1,4 +1,4 @@
-#ifndef __QUICKSORT_H__
+﻿#ifndef __QUICKSORT_H__
 #define __QUICKSORT_H__
 
 class Quick
@@ -6,11 +6,11 @@ class Quick
 public:
 	void Sort(char *a, int length)
 	{
-		//�ڿ�ʼ�ݹ�����ǰ����ȴ���һ�����飬��ֹ���������з֣������Ͳ����׳���O(N^2)�������
+		//在开始递归排序前最好先打乱一下数组，防止不合理的切分；这样就不容易出现O(N^2)这种情况
 		SortCore(a, 0, length - 1);
 	}
 
-	//�����Ż��������鱻�ָ��С��ĳ����ֵ��ʱ�򣬸��ò�������
+	//可以优化：在数组被分割得小于某个数值的时候，改用插入排序
 	void SortCore(char *a, int left, int right)
 	{
 		if (left >= right)
@@ -25,20 +25,20 @@ public:
 		}
 	}
 
-	//�����Ż���ѡȡ����Ԫ�����ҳ��ⲿ��Ԫ�ص���λ��������׼
-	//�����Ż������뿴quick3way������һ�������У�������ѡ������ֵͬ����Ԫ����Ϊ��׼�����Ըĳ������з֣����ǱȻ�׼ֵС��Ԫ�ط�����ߣ����׼ֵ��ȵ�Ԫ�ط����м䣬�Ȼ�׼ֵ���Ԫ�ط����ұߣ����ڰ��������ظ�Ԫ�ص����飬���Խ�ʱ�临�Ӷ���NlgN����N	
+	//可以优化：选取部分元素来找出这部分元素的中位数当作基准
+	//可以优化（代码看quick3way）：在一个数组中，不会多次选择主键值同样的元素作为基准；可以改成三向切分，就是比基准值小的元素放在左边，与基准值相等的元素放在中间，比基准值大的元素放在右边；对于包含大量重复元素的数组，可以将时间复杂度有NlgN降到N	
 	int Partition(char *a, int left, int right)
 	{
-		//�ָ��׼��ȡ����Ԫ��������׼
+		//分割标准，取了首元素来当标准
 		char standard = a[left];
 #if 0
-		//�Լ�д�ĵ�һ���汾
+		//自己写的第一个版本
 		int i = left;
 		int j = right+1;
 		while (i < j)
 		{
-			while (a[++i] <= standard && i <= right){  }			//i <= right���Ըĳ�i < right
-			while (standard <= a[--j] && j >= left+1){  }			//j >= left+1�����Ը���j > left+1
+			while (a[++i] <= standard && i <= right){  }			//i <= right可以改成i < right
+			while (standard <= a[--j] && j >= left+1){  }			//j >= left+1不可以更改j > left+1
 
 			if (i < j)
 			{
@@ -49,14 +49,14 @@ public:
 		}
 #endif
 #if 0
-		/*��δ���ǳ����������еĴ���С�ںŶ�Ҫ�ǳ�׼ȷ�����Ե���ģ�������*/
-		//�Լ�д�ĵڶ����汾
+		/*这段代码非常脆弱，所有的大于小于号都要非常准确，可以当作模板记下来*/
+		//自己写的第二个版本
 		int i = left + 1;
 		int j = right;
 		while (true)
 		{
-			while (a[i] <= standard && i <= right) { ++i; }			//i <= right���Ըĳ�i < right
-			while (standard <= a[j] && j >= left+1) { --j; }		//j >= left+1�����Ը���j > left+1
+			while (a[i] <= standard && i <= right) { ++i; }			//i <= right可以改成i < right
+			while (standard <= a[j] && j >= left+1) { --j; }		//j >= left+1不可以更改j > left+1
 
 			if (i < j)
 			{
@@ -69,15 +69,15 @@ public:
 		}
 #endif
 #if 0
-		//�鱾�İ汾
+		//书本的版本
 		int i = left;
 		int j = right + 1;
 		while (true)
 		{
-			//�ر�ע�� ++i �� --j ��λ��
-			//ע��a[i] <= standard��standard <= a[j]�ĵ��ں�
-			while (a[++i] <= standard && i <= right){}				//i <= right���Ըĳ�i < right
-			while (standard <= a[--j] && j >= left + 1){}			//j >= left+1�����Ը���j > left+1
+			//特别注意 ++i 和 --j 的位置
+			//注意a[i] <= standard和standard <= a[j]的等于号
+			while (a[++i] <= standard && i <= right){}				//i <= right可以改成i < right
+			while (standard <= a[--j] && j >= left + 1){}			//j >= left+1不可以更改j > left+1
 
 			if (i < j)
 			{
@@ -90,15 +90,15 @@ public:
 		}
 #endif
 #if 1
-		//�ģ��鱾�İ汾
+		//改：书本的版本
 		int i = left+1;
 		int j = right;
-		do					//ʹ��do...while������ȷ�ģ�֮ǰ֮���Ի��������Ϊû����ʶ��i��j�ĳ�ʼλ������Ҫ��������while��ȷ����
+		do					//使用do...while才是正确的，之前之所以会出错是因为没有意识到i和j的初始位置是需要先用两个while来确定的
 		{
-			//�ر�ע�� ++i �� --j ��λ��
-			//ע��a[i] <= standard��standard <= a[j]�ĵ��ں�
-			while (a[i] <= standard && i <= right){ ++i; }				//i <= right���Ըĳ�i < right
-			while (standard <= a[j] && j >= left + 1){ --j; }			//j >= left+1�����Ը���j > left+1
+			//特别注意 ++i 和 --j 的位置
+			//注意a[i] <= standard和standard <= a[j]的等于号
+			while (a[i] <= standard && i <= right){ ++i; }				//i <= right可以改成i < right
+			while (standard <= a[j] && j >= left + 1){ --j; }			//j >= left+1不可以更改j > left+1
 
 			if (i < j)
 			{
@@ -116,13 +116,13 @@ public:
 	}
 };
 
-//�����зֵĿ�������
+//三向切分的快速排序
 class Quick3way
 {
 public:
 	void Sort(char *a, int length)
 	{
-		//�ڿ�ʼ�ݹ�����ǰ����ȴ���һ�����飬��ֹ���������з֣������Ͳ����׳���O(N^2)�������
+		//在开始递归排序前最好先打乱一下数组，防止不合理的切分；这样就不容易出现O(N^2)这种情况
 		SortCore(a, 0, length - 1);
 	}
 
@@ -134,10 +134,10 @@ public:
 		}
 		else
 		{
-			//�����з�
+			//三向切分
 #if 1
-			//�Լ���ʵ��
-			//��һ���з�
+			//自己的实现
+			//第一次切分
 			char standard = a[left];
 			int i = left+1;
 			int j = right;
@@ -158,7 +158,7 @@ public:
 
 			int lessRight = j - 1;
 
-			//�ڶ����з�
+			//第二次切分
 			j = right;
 			do
 			{
@@ -179,10 +179,10 @@ public:
 			SortCore(a, equelRight + 1, right);
 #endif
 #if 0		
-			//�鱾��ʵ��
-			//����޷�������δ��룬��ʹ��������6��2��3��7��6��6��9��1����ģ��һ��
+			//书本的实现
+			//如果无法理解这段代码，请使用样例：6、2、3、7、6、6、9、1，来模拟一下
 			char standard = a[left];
-			int lt = left;				//lt��ʵ��Զ��ָ������˵Ļ�׼ֵ
+			int lt = left;				//lt其实永远都指向最左端的基准值
 			int i = left + 1;
 			int gt = right;
 			while (i <= gt)

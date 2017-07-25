@@ -1,15 +1,15 @@
-#ifndef __SELECTIONSORT_H__
+ï»¿#ifndef __SELECTIONSORT_H__
 #define __SELECTIONSORT_H__
 
 class Selection
 {
 public:
-	//Ñ¡ÔñÅÅĞò
+	//é€‰æ‹©æ’åº
 	void Sort(char *a, int length)
 	{
 		for (int index = 0; index < length - 1; ++index)
 		{
-			//ÕÒ³ö´Óµ±Ç°Î»ÖÃindex¿ªÊ¼µ½ºóÃæËùÓĞÔªËØÖĞ×îĞ¡ÔªËØµÄÏÂ±ê
+			//æ‰¾å‡ºä»å½“å‰ä½ç½®indexå¼€å§‹åˆ°åé¢æ‰€æœ‰å…ƒç´ ä¸­æœ€å°å…ƒç´ çš„ä¸‹æ ‡
 			int indexOfCurMin = index;
 			for (int i = index + 1; i < length; ++i)
 			{
@@ -17,7 +17,7 @@ public:
 					indexOfCurMin = i;
 			}
 
-			//½«ÕÒµ½µÄ×îĞ¡ÔªËØºÍindexÎ»ÖÃÉÏµÄÔªËØ½øĞĞ½»»»
+			//å°†æ‰¾åˆ°çš„æœ€å°å…ƒç´ å’Œindexä½ç½®ä¸Šçš„å…ƒç´ è¿›è¡Œäº¤æ¢
 			int temp = a[index];
 			a[index] = a[indexOfCurMin];
 			a[indexOfCurMin] = temp;

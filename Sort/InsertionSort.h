@@ -1,16 +1,16 @@
-#ifndef __INSERTIONSOER_H__
+ï»¿#ifndef __INSERTIONSOER_H__
 #define __INSERTIONSOER_H__
 
-//²åÈëÅÅĞò(Ã°ÅİÅÅĞò)
+//æ’å…¥æ’åº(å†’æ³¡æ’åº)
 class Insertion
 {
 public:
-	//Ã°ÅİĞÎÊ½
+	//å†’æ³¡å½¢å¼
 	void Sort1_0(char *a, int length)
 	{
-		for (int index = 1; index < length; ++index)	//Ã¿Ò»´ÎĞèÒª¿ªÊ¼ÏÂ³ÁµÄÔªËØ
+		for (int index = 1; index < length; ++index)	//æ¯ä¸€æ¬¡éœ€è¦å¼€å§‹ä¸‹æ²‰çš„å…ƒç´ 
 		{
-			for (int i = index; i > 0; --i)				//ÏÂ³ÁµÄ¹ı³Ì
+			for (int i = index; i > 0; --i)				//ä¸‹æ²‰çš„è¿‡ç¨‹
 			{
 				if (a[i] < a[i - 1])
 				{
@@ -22,17 +22,17 @@ public:
 		}
 	}
 
-	//²åÈëĞÎÊ½
-	//Ã°ÅİµÄÓÅ»¯°æ±¾
+	//æ’å…¥å½¢å¼
+	//å†’æ³¡çš„ä¼˜åŒ–ç‰ˆæœ¬
 	void Sort2_0(char *a, int length)
 	{
-		for (int index = 1; index < length; ++index)				//Ã¿Ò»´ÎĞèÒª¿ªÊ¼ÏÂ³ÁµÄÔªËØ
+		for (int index = 1; index < length; ++index)				//æ¯ä¸€æ¬¡éœ€è¦å¼€å§‹ä¸‹æ²‰çš„å…ƒç´ 
 		{
 			char needToInsert = a[index];
 
 			int i;
-			for (i = index - 1; i >= 0 && needToInsert < a[i]; --i)		//Ñ°ÕÒÎ»ÖÃµÄ¹ı³Ì
-				a[i + 1] = a[i];	//ÓÒÒÆ
+			for (i = index - 1; i >= 0 && needToInsert < a[i]; --i)		//å¯»æ‰¾ä½ç½®çš„è¿‡ç¨‹
+				a[i + 1] = a[i];	//å³ç§»
 
 			a[i + 1] = needToInsert;
 		}

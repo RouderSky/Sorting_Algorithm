@@ -1,4 +1,4 @@
-#include <iostream>		/* cout */
+ï»¿#include <iostream>		/* cout */
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 #include "SelectionSort.h"
@@ -10,7 +10,7 @@
 
 using namespace std;
 
-//¶Ôº¯Êıpf£¬Ëæ»úÉú³É³¤¶ÈÎªnµÄcharÊı×é£¬½øĞĞt´Î²âÊÔ
+//å¯¹å‡½æ•°pfï¼Œéšæœºç”Ÿæˆé•¿åº¦ä¸ºnçš„charæ•°ç»„ï¼Œè¿›è¡Œtæ¬¡æµ‹è¯•
 double TimeRandomInput(void(*pf)(char*, int),int n,int t)
 {
 	clock_t start = clock();
@@ -60,7 +60,7 @@ int main()
 #endif
 
 #if 0
-	//Ê±¼ä²âÊÔ
+	//æ—¶é—´æµ‹è¯•
 	double time1 = TimeRandomInput(SelectionSort, 1000, 1000);
 	double time2 = TimeRandomInput(SelectionSort, 1000, 1000);
 	cout << time1 << endl;
