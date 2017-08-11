@@ -11,3 +11,5 @@
 
 ### 参考资料 ###
 《Algorithms》, 4th Edition by Robert Sedgewick and Kevin Wayne
+
+  int a;
