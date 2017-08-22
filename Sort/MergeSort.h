@@ -9,7 +9,7 @@ using namespace std;
 class Merge
 {
 private:
-	//创建一个a数组的副本,辅助空间；其实可以不用的，用时间来换空间
+	//a数组的副本,辅助空间
 	char *aux;
 public:
 	Merge(){ aux = NULL; }
@@ -71,7 +71,7 @@ public:
 class MergeBu
 {
 private:
-	//创建一个a数组的副本,辅助空间；其实可以不用的，用时间来换空间
+	//a数组的副本,辅助空间
 	char *aux;
 
 public:
