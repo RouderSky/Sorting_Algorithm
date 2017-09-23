@@ -115,7 +115,7 @@ public:
 
 		for (int subArraySize = 1; subArraySize < length; subArraySize <<= 1)
 		{
-			for (int left = 0; left < length - subArraySize; left += (subArraySize << 1))		//注意这里的终止条件
+			for (int left = 0; left + subArraySize < length; left += (subArraySize << 1))		//注意这里的终止条件
 				merge(a, left, left + subArraySize - 1, min(left + (subArraySize << 1) - 1, length - 1));
 		}
 	}
