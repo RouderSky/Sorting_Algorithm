@@ -9,7 +9,7 @@ using namespace std;
 class Merge
 {
 private:
-	//a数组的副本,辅助空间
+	//原数组的副本,辅助空间
 	char *aux;
 public:
 	Merge(){ aux = NULL; }
