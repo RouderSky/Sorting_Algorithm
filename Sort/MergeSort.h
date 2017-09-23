@@ -41,7 +41,7 @@ public:
 	//这个函数还可以优化，如果left和right之间的插值小到一定的程度，就不用再递归了；直接用插入排序、希尔排序或者选择排序，速度可以提升；其中插入排序可以缩短10%~15%
 	void SortCore(char *a, int left, int right)
 	{
-		if (left >= right)
+		if (left >= right)				//可以改成==
 			return;
 		else
 		{
@@ -55,7 +55,7 @@ public:
 	//启动函数
 	void Sort(char *a, int length)
 	{
-		//保险
+		//防止内存泄漏
 		if (aux != NULL)
 		{
 			delete[] aux;
