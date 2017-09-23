@@ -5,7 +5,6 @@
 class Insertion
 {
 public:
-	//冒泡形式
 	void Sort1_0(char *a, int length)
 	{
 		for (int index = 1; index < length; ++index)	//每一次需要开始下沉的元素
@@ -21,9 +20,8 @@ public:
 			}
 		}
 	}
-
-	//插入形式
-	//冒泡的优化版本
+	
+	//优化版本
 	void Sort2_0(char *a, int length)
 	{
 		for (int index = 1; index < length; ++index)				//每一次需要开始下沉的元素
