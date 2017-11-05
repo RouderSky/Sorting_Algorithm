@@ -76,7 +76,7 @@ public:
 		{
 			//特别注意 ++i 和 --j 的位置
 			//注意a[i] <= standard和standard <= a[j]的等于号
-			while (a[++i] <= standard && i <= right){}				//i <= right可以改成i < right
+			while (a[++i] <= standard && i <= right){}			//i <= right可以改成i < right
 			while (standard <= a[--j] && j >= left + 1){}			//j >= left+1不可以更改j > left+1
 
 			if (i < j)
@@ -93,12 +93,12 @@ public:
 		//改：书本的版本
 		int i = left+1;
 		int j = right;
-		do					//使用do...while才是正确的，之前之所以会出错是因为没有意识到i和j的初始位置是需要先用两个while来确定的
+		while(true)					//使用do...while才是正确的，之前之所以会出错是因为没有意识到i和j的初始位置是需要先用两个while来确定的
 		{
 			//特别注意 ++i 和 --j 的位置
 			//注意a[i] <= standard和standard <= a[j]的等于号
-			while (a[i] <= standard && i <= right){ ++i; }				//i <= right可以改成i < right
-			while (standard <= a[j] && j >= left + 1){ --j; }			//j >= left+1不可以更改j > left+1
+			while (a[i] <= standard && i <= right){ ++i; }			//i <= right可以改成i < right
+			while (standard <= a[j] && j >= left + 1){ --j; }		//j >= left+1不可以更改j > left+1
 
 			if (i < j)
 			{
@@ -106,8 +106,10 @@ public:
 				a[i] = a[j];
 				a[j] = temp;
 			}
+			else
+				break;
 
-		} while (i < j);
+		}
 #endif
 		a[left] = a[j];
 		a[j] = standard;
