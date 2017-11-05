@@ -143,7 +143,7 @@ public:
 			char standard = a[left];
 			int i = left+1;
 			int j = right;
-			do
+			while(true)
 			{
 				while (a[i] < standard && i <= right){ ++i; }
 				while (standard <= a[j] && j >= left+1){ --j; }
@@ -154,7 +154,9 @@ public:
 					a[i] = a[j];
 					a[j] = temp;
 				}
-			}while(i<j);
+				else
+					break;
+			}
 			a[left] = a[j];
 			a[j] = standard;
 
@@ -162,7 +164,7 @@ public:
 
 			//第二次切分
 			j = right;
-			do
+			while(true)
 			{
 				while (a[i] == standard && i <= right){ ++i; }
 				while (standard < a[j] && j >= lessRight + 2){ --j; }
@@ -173,7 +175,9 @@ public:
 					a[i] = a[j];
 					a[j] = temp;
 				}
-			}while(i < j);
+				else
+					break;
+			}
 
 			int equelRight = j;
 
