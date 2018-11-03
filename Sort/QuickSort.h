@@ -137,7 +137,7 @@ public:
 		else
 		{
 			//三向切分
-#if 1
+#if 0
 			//自己的实现
 			//第一次切分
 			char standard = a[left];
@@ -184,11 +184,12 @@ public:
 			SortCore(a, left, lessRight);
 			SortCore(a, equelRight + 1, right);
 #endif
-#if 0		
+#if 1	
 			//书本的实现
 			//如果无法理解这段代码，请使用样例：6、2、3、7、6、6、9、1，来模拟一下
 			char standard = a[left];
-			int lt = left;				//lt其实永远都指向最左端的基准值
+			//[lt,i-1]中的元素都等于基准值
+			int lt = left;
 			int i = left + 1;
 			int gt = right;
 			while (i <= gt)
@@ -217,7 +218,7 @@ public:
 			}
 
 			SortCore(a, left, lt - 1);
-			SortCore(a, gt + 1, right); 
+			SortCore(a, i, right); 
 #endif
 		}
 	}

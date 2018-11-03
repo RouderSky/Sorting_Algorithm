@@ -30,32 +30,34 @@ double TimeRandomInput(void(*pf)(char*, int),int n,int t)
 	return totalTime;
 }
 
+#define NEED_2_BE_SORT_DATA_LEN 10
+
 int main()
 {
 #if 1
 	srand(time(NULL));
-	char a[10]; //{'j','i','h','o','p'};
+	char a[NEED_2_BE_SORT_DATA_LEN]; //{'j','i','h','o','p'};
 
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < NEED_2_BE_SORT_DATA_LEN; ++i)
 		a[i] = 'A' + rand() % 26;
 
 //	Selection selection;
-//	selection.Sort(a, 5);
+//	selection.Sort(a, NEED_2_BE_SORT_DATA_LEN);
 //	Insertion insertion;
-//	insertion.Sort2_0(a, 5);
+//	insertion.Sort2_0(a, NEED_2_BE_SORT_DATA_LEN);
 //	Shell shell;
-//	shell.Sort2_0(a, 5);
+//	shell.Sort2_0(a, NEED_2_BE_SORT_DATA_LEN);
 //	Merge merge;
-//	merge.Sort(a, 5);
+//	merge.Sort(a, NEED_2_BE_SORT_DATA_LEN);
 //	Quick quick;
-//	quick.Sort(a, 10);
+//	quick.Sort(a, NEED_2_BE_SORT_DATA_LEN);
 	Quick3way quick3way;
-	quick3way.Sort(a, 10);
+	quick3way.Sort(a, NEED_2_BE_SORT_DATA_LEN);
 //	Heap heap;
-//	heap.sort(a, 10);
+//	heap.sort(a, NEED_2_BE_SORT_DATA_LEN);
 
 	for (int i = 0; i < 10; ++i)
-		cout << a[i] << " ";
+		cout << (int)a[i] << " ";
 	cout << endl;
 #endif
 
