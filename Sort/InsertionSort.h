@@ -17,6 +17,8 @@ public:
 					a[i] = a[i - 1];
 					a[i - 1] = temp;
 				}
+				//else
+				//	break;
 			}
 		}
 	}
