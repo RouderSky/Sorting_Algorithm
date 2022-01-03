@@ -188,7 +188,9 @@ public:
 			//书本的实现
 			//如果无法理解这段代码，请使用样例：6、2、3、7、6、6、9、1，来模拟一下
 			char standard = a[left];
+			//[left,lt-1]中的元素都小于基准值
 			//[lt,i-1]中的元素都等于基准值
+			//[gt+1,right]中的元素都大于基准值
 			int lt = left;
 			int i = left + 1;
 			int gt = right;
