@@ -7,12 +7,12 @@ class MaxPQ
 {
 private:
 	char *pq;		//节点为k，父节点为(k-1)/2，左孩子为2*k+1，右孩子为2*k+2
-	int N;			//记录堆中元素的个数
+	int count;		//记录堆中元素的个数
 public:
 	MaxPQ(int maxN)
 	{
 		pq = new char[maxN];
-		N = 0;
+		count = 0;
 	}
 	~MaxPQ()
 	{
@@ -20,28 +20,28 @@ public:
 	}
 	bool isEmpty()
 	{
-		return N == 0;
+		return count == 0;
 	}
 	int size()
 	{
-		return N;
+		return count;
 	}
 	void insert(char v)
 	{
-		pq[N] = v;
-		swim(N);
+		pq[count] = v;
+		swim(count);
 
-		++N;
+		++count;
 	}
 	char delMax()
 	{
 		char max = pq[0];
 
 		char temp = pq[0];
-		pq[0] = pq[N - 1];
-		pq[N - 1] = temp;
+		pq[0] = pq[count - 1];
+		pq[count - 1] = temp;
 
-		--N;
+		--count;
 
 		sink(0);
 
@@ -62,10 +62,10 @@ public:
 	//核心
 	void sink(int k)
 	{
-		while (2 * k + 1 < N)
+		while (2 * k + 1 < count)
 		{
 			int maxChild = 2 * k + 1;
-			if (maxChild + 1 < N && pq[maxChild + 1] > pq[maxChild])
+			if (maxChild + 1 < count && pq[maxChild + 1] > pq[maxChild])
 				++maxChild;
 
 			if (pq[k] >= pq[maxChild])
@@ -87,13 +87,13 @@ public:
 class Heap
 {
 public:
-	//注意：N是待排序数组的长度
-	void sink(char *a, int k, int N)
+	//注意：count是待排序数组的长度
+	void sink(char *a, int k, int count)
 	{
-		while (2 * k + 1 < N)
+		while (2 * k + 1 < count)
 		{
 			int maxChild = 2 * k + 1;
-			if (maxChild + 1 < N && a[maxChild + 1] > a[maxChild])
+			if (maxChild + 1 < count && a[maxChild + 1] > a[maxChild])
 				++maxChild;
 
 			if (a[k] >= a[maxChild])
@@ -109,12 +109,12 @@ public:
 		}
 	}
 	//可以优化：先下沉后上浮，可将比较次数减少一半；这个方法需要额外的空间来辅助，只有当比较需要很高的代价时才采用
-	void sort(char *a,int N)
+	void sort(char *a,int count)
 	{
-		for (int i = (N - 1) / 2; i >= 0; --i)
-			sink(a, i, N);
+		for (int i = (count - 1) / 2; i >= 0; --i)
+			sink(a, i, count);
 
-		for (int i = N - 1; i > 0; --i)
+		for (int i = count - 1; i > 0; --i)
 		{
 			char temp = a[i];
 			a[i] = a[0];
