@@ -55,8 +55,8 @@ public:
 		int j = right;
 		while (true)
 		{
-			while (a[i] <= standard && i <= right) { ++i; }			//i <= right可以改成i < right
-			while (standard <= a[j] && j >= left+1) { --j; }		//j >= left+1不可以更改j > left+1
+			while (i <= right && a[i] <= standard) { ++i; }			//i <= right可以改成i < right
+			while (j >= left+1 && standard <= a[j]) { --j; }		//j >= left+1不可以更改j > left+1
 
 			if (i < j)
 			{
@@ -97,8 +97,8 @@ public:
 		{
 			//特别注意 ++i 和 --j 的位置
 			//注意a[i] <= standard和standard <= a[j]的等于号
-			while (a[i] <= standard && i <= right){ ++i; }			//i <= right可以改成i < right
-			while (standard <= a[j] && j >= left + 1){ --j; }		//j >= left+1不可以更改j > left+1
+			while (i <= right && a[i] <= standard){ ++i; }			//i <= right可以改成i < right
+			while (j >= left + 1 && standard <= a[j]){ --j; }		//j >= left+1不可以更改j > left+1
 
 			if (i < j)
 			{
